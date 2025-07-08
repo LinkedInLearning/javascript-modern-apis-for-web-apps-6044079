@@ -1,53 +1,75 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Fetch API Example</title>
-        <style type="text/css">
-        </style>
+        <style type="text/css"></style>
         <link rel="stylesheet" href="../../style.css" />
     </head>
     <body>
         <h1>Using the Fetch API</h1>
         <div id="content">
-            <p>The fetch API makes AJAX-style data requests easier to handle.</p>
-            <p>Open the developer tools console to see the responses from the server.</p>
+            <p>
+                The fetch API makes AJAX-style data requests easier to handle.
+            </p>
+            <p>
+                Open the developer tools console to see the responses from the
+                server.
+            </p>
+            <button id="btn1">Fetch Data GET</button>
+            <button id="btn2">Fetch Data POST</button>
         </div>
 
         <script>
-            window.addEventListener("load", function () {
-                // Perform a regular GET operation
-                fetch("https://httpbin.org/json").then(function (response) {
-                    console.log("Content type:", response.headers.get('Content-Type'));
+            function fetchGET() {
+                fetch("https://httpbin.org/json")
+                    .then(function (response) {
+                        console.log(
+                            "Content type:",
+                            response.headers.get("Content-Type")
+                        );
+                        console.log("Redirected: ", response.redirected);
+                        console.log("Status:", response.status);
+                        console.log("Status text:", response.statusText);
+                        console.log("Response type:", response.type);
+                        console.log("Response URL:", response.url);
+                        if (response.status == 200) {
+                            return response.text();
+                        }
+                    })
+                    .then(function (returnedData) {
+                        console.log("Returned data:", returnedData);
+                    })
+                    .catch(function (error) {
+                        console.log("Error:", error);
+                    });
+            }
 
-                    console.log("Redirected: ", response.redirected);
-                    console.log("Status:", response.status);
-                    console.log("Status text:", response.statusText);
-                    console.log("Response type:", response.type);
-                    console.log("Response URL:", response.url);
-
-                    if (response.status == 200) {
-                        return response.text();
-                    }
-                }).then(function (returnedData) {
-                    console.log("Returned data:", returnedData);
-                }).catch(function (error) {
-                    console.log("Error:", error);
-                })
-
-                // perform a POST function with data in the body
+            function fetchPOST() {
                 fetch("https://httpbin.org/post", {
-                    method: 'post',
-                    body: 'foo=bar',
+                    method: "post",
+                    body: "Sample data for the POST",
                     headers: {
-                        "x-Custom-Header": "my-custom-value"
-                    }
-                }).then(function (response) {
-                    return response.text();
-                }).then(function (returnedData) {
-                    console.log("Returned data:", returnedData);
-                }).catch(function (error) {
-                    console.log('Request failed', error);
-                });
+                        "x-Custom-Header": "my-custom-value",
+                    },
+                })
+                    .then(function (response) {
+                        return response.text();
+                    })
+                    .then(function (returnedData) {
+                        console.log("Returned data:", returnedData);
+                    })
+                    .catch(function (error) {
+                        console.log("Request failed", error);
+                    });
+            }
+
+            window.addEventListener("load", function () {
+                document
+                    .getElementById("btn1")
+                    .addEventListener("click", fetchGET);
+                document
+                    .getElementById("btn2")
+                    .addEventListener("click", fetchPOST);
             });
         </script>
     </body>
