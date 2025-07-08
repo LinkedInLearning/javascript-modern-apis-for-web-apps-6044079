@@ -96,8 +96,8 @@
 
                             // Set up the notification options
                             var notOptions = {
-                                body: "Test Notification",
-                                icon: "info.png",
+                                body: body,
+                                icon: useIcon ? "../images/info.png" : null,
                                 requireInteraction: isPersistent,
                             };
 
