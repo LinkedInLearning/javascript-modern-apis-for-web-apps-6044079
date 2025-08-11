@@ -27,10 +27,8 @@
                             "Content type:",
                             response.headers.get("Content-Type")
                         );
-                        console.log("Redirected: ", response.redirected);
                         console.log("Status:", response.status);
                         console.log("Status text:", response.statusText);
-                        console.log("Response type:", response.type);
                         console.log("Response URL:", response.url);
                         if (response.status == 200) {
                             return response.text();
