@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Popover Example</title>
+        <style type="text/css">
+            /* Define a CSS style for the popover */
+            #popover1,
+            #popover2 {
+                background-color: rgb(88, 88, 88);
+                color: white;
+                padding: 0;
+                border: 0;
+                border-radius: 0.5rem;
+                box-shadow: 0 0 15px rgb(217, 215, 215);
+                padding: 10pt;
+            }
+
+            #popover1::backdrop {
+                background: rgb(190 190 190 / 50%);
+            }
+
+            #popover2 {
+                margin: 5pt;
+                position-area: block-end span-inline-end;
+            }
+        </style>
+        <link rel="stylesheet" href="../../style.css" />
+    </head>
+    <body>
+        <h1>Popover Example</h1>
+        <div id="content">
+            <p>The popover element provides the ability to display content over other content.
+            Typical use cases for the popover API include user-interactive elements like action menus, 
+            custom "toast" notifications, form element suggestions, content pickers, or teaching UI.
+            </p>
+            <p>Popovers are similar to dialogs, but they address different use cases. Dialogs are usually
+              used for more critical interactions that require the user's immediate attention. 
+              They interrupt the user's current task to present important information, collect input, 
+              or require a decision before the user can continue.</p>
+            <p>
+            Popovers are designed for lightweight, contextual information or simple interactions. 
+            They're typically triggered by user actions like clicking a button or hovering over an 
+            element, and they provide supplementary content that enhances the current context without 
+            interrupting the user's workflow.
+            </p>
+            <p>
+              Like Dialogs, Popovers can also be styled using regular CSS like other elements.
+            </p>
+            <button id="show1" popovertarget="popover1">Show/Hide Basic Popover</button>
+            <button id="show2">Hover for popover</button>
+        </div>
+        <!-- Define the popover and its content-->
+        <div id="popover1" popover>
+            <h1>This is a popover element</h1>
+            <div>
+                <p>It has content styled like any other HTML element.</p>
+            </div>
+        </div>
+        <div id="popover2" popover>
+            <h1>This is another popover element</h1>
+            <div>
+                <p>It has content styled like any other HTML element.</p>
+            </div>
+        </div>
+        <script>
+            window.addEventListener("DOMContentLoaded", function () {
+                const popover2 = document.getElementById("popover2");
+                const hoverButton = document.getElementById("show2");
+                
+                hoverButton.addEventListener("mouseover", function () {
+                    popover2.showPopover({ source: hoverButton });
+                });
+                hoverButton.addEventListener("mouseout", function () {
+                    popover2.hidePopover();
+                });
+            });
+        </script>
+    </body>
+</html>
